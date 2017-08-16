@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<root>
+	<desc>This file contains a task (map + start-goal location) for a pathfinder as well as some additional data</desc>
+	<map>
+    <title>Example</title>
+    <seed>0.5</seed>
+    <abs_width>20</abs_width>
+    <abs_height>20</abs_height>
+    <abs_startx>0.5</abs_startx>
+    <abs_starty>0.5</abs_starty>
+    <abs_finishx>21.5</abs_finishx>
+    <abs_finishy>23.5</abs_finishy>
+    <obstacles>
+        <obstacle>
+            <point x="16" y="12" />
+            <point x="17" y="8" />
+            <point x="18" y="12" />
+        </obstacle>
+    </obstacles>
+    </map>
+</root>

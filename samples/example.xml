@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<root>
+	<desc>This file contains a task (map + start-goal location) for a pathfinder as well as some additional data</desc>
+	<map>
+        <title>Example</title>
+        <seed>0.5</seed>
+        <abs_width>28</abs_width>
+        <abs_height>38</abs_height>
+        <abs_startx>1</abs_startx>
+        <abs_starty>1</abs_starty>
+        <abs_finishx>21.5</abs_finishx>
+        <abs_finishy>23.5</abs_finishy>
+        <obstacles>
+            <obstacle>
+                <point x="2" y="2" />
+                <point x="8" y="2" />
+                <point x="2" y="5" />
+            </obstacle>
+            <obstacle>
+                <point x="12" y="3" />
+                <point x="15" y="3" />
+                <point x="15" y="7" />
+                <point x="13" y="7" />
+                <point x="13" y="4" />
+                <point x="12" y="4" />
+            </obstacle>
+            <obstacle>
+                <point x="24" y="4" />
+                <point x="27" y="4" />
+                <point x="29" y="2" />
+                <point x="28" y="6" />
+                <point x="26" y="6" />
+                <point x="26" y="7" />
+                <point x="25" y="7" />
+                <point x="25" y="6" />
+                <point x="24" y="6" />
+            </obstacle>
+            <obstacle>
+                <point x="22" y="12" />
+                <point x="24" y="12" />
+                <point x="24" y="9" />
+                <point x="26" y="9" />
+                <point x="26" y="10" />
+                <point x="25" y="10" />
+                <point x="25" y="13" />
+                <point x="22" y="13" />
+            </obstacle>
+            <obstacle>
+                <point x="23" y="11" />
+                <point x="27" y="11" />
+                <point x="27" y="14" />
+                <point x="26" y="14" />
+                <point x="26" y="15" />
+                <point x="24" y="15" />
+                <point x="24" y="16" />
+                <point x="23" y="16" />
+            </obstacle>
+            <obstacle>
+                <point x="3" y="11" />
+                <point x="5" y="11" />
+                <point x="5" y="12" />
+                <point x="9" y="12" />
+                <point x="9" y="11" />
+                <point x="10" y="11" />
+                <point x="10" y="14" />
+                <point x="7" y="14" />
+                <point x="7" y="13" />
+                <point x="5" y="13" />
+                <point x="5" y="14" />
+                <point x="3" y="14" />
+            </obstacle>
+            <obstacle>
+                <point x="16" y="14" />
+                <point x="16" y="12" />
+                <point x="18" y="12" />
+                <point x="18" y="14" />
+            </obstacle>
+            <obstacle>
+                <point x="16" y="12" />
+                <point x="17" y="8" />
+                <point x="18" y="12" />
+            </obstacle>
+            <obstacle>
+                <point x="9" y="18" />
+                <point x="16" y="18" />
+                <point x="14" y="20" />
+                <point x="15" y="21" />
+                <point x="15" y="24" />
+                <point x="9" y="24" />
+            </obstacle>
+        </obstacles>
+    </map>
+</root>
