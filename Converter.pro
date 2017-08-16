@@ -19,4 +19,4 @@ HEADERS += \
     map.h \
     filler.h \
     point.h \
-    bresenham.h \
+    bresenham.h
