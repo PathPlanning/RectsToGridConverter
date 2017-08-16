@@ -3,6 +3,10 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
+win32 { QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++ }
+
+QMAKE_CXXFLAGS += -std=c++11
+
 SOURCES += main.cpp \
     tinyxml/tinystr.cpp \
     tinyxml/tinyxml.cpp \
