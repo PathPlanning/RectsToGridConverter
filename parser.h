@@ -10,7 +10,7 @@
 #include <string>
 #include <iostream>
 #include <cmath>
-
+#include <random>
 
 //Чтение карты
 //функции обработки ошибок

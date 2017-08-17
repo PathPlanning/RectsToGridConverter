@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <root>
     <map>
-        <title>Example</title>
-        <seed>0.5</seed>
+        <title>Example1</title>
         <abs_width>20</abs_width>
         <abs_height>20</abs_height>
         <abs_startx>0.5</abs_startx>
