@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <root>
-	<map>
+    <map>
     <title>Example</title>
     <seed>0.5</seed>
     <abs_width>24</abs_width>
