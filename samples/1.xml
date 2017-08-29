@@ -8,8 +8,8 @@
         <abs_starty>0.5</abs_starty>
         <abs_finishx>21.5</abs_finishx>
         <abs_finishy>23.5</abs_finishy>
-        <obstacles>
-            <obstacle>
+        <obstacles quantity="1">
+            <obstacle number="0">
                 <point x="16" y="12" />
                 <point x="17" y="8" />
                 <point x="18" y="12" />

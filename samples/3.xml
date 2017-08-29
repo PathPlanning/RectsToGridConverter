@@ -8,32 +8,32 @@
     <abs_starty>1.5</abs_starty>
     <abs_finishx>21.5</abs_finishx>
     <abs_finishy>23.5</abs_finishy>
-    <obstacles>
-        <obstacle>
+    <obstacles quantity="10">
+        <obstacle number="0">
             <point x="-2.5" y="1" />
             <point x="2" y="1" />
             <point x="2" y="3" />
             <point x="-2.5" y="3" />
         </obstacle>
-        <obstacle>
+        <obstacle number="1">
             <point x="13" y="1" />
             <point x="20.9" y="1" />
             <point x="20.9" y="4" />
             <point x="13" y="4" />
         </obstacle>
-        <obstacle>
+        <obstacle number="2">
             <point x="10" y="3" />
             <point x="17.5" y="3" />
             <point x="17.5" y="6" />
             <point x="10" y="6" />
         </obstacle>
-        <obstacle>
+        <obstacle number="3">
             <point x="8" y="5" />
             <point x="15.2" y="5" />
             <point x="15.2" y="8" />
             <point x="8" y="8" />
         </obstacle>
-        <obstacle>
+        <obstacle number="4">
             <point x="1" y="6" />
             <point x="4.5" y="6" />
             <point x="4.5" y="5" />
@@ -45,7 +45,7 @@
             <point x="2" y="8" />
             <point x="1" y="8" />
         </obstacle>
-        <obstacle>
+        <obstacle number="5">
             <point x="18.5" y="9" />
             <point x="22.6" y="9" />
             <point x="22.6" y="12" />
@@ -55,7 +55,7 @@
             <point x="20" y="12" />
             <point x="18.5" y="12" />
         </obstacle>
-        <obstacle>
+        <obstacle number="6">
             <point x="13" y="13" />
             <point x="15" y="13" />
             <point x="15" y="19" />
@@ -65,7 +65,7 @@
             <point x="10.5" y="15" />
             <point x="13" y="15" />
         </obstacle>
-        <obstacle>
+        <obstacle number="7">
             <point x="4" y="11" />
             <point x="6" y="11" />
             <point x="6" y="14" />
@@ -85,7 +85,7 @@
             <point x="3" y="14" />
             <point x="4" y="14" />
         </obstacle>
-        <obstacle>
+        <obstacle number="8">
             <point x="2" y="22" />
             <point x="4" y="20" />
             <point x="5" y="19.4" />
@@ -94,7 +94,7 @@
             <point x="5" y="25" />
             <point x="2" y="25" />
         </obstacle>
-        <obstacle>
+        <obstacle number="9">
             <point x="16" y="21" />
             <point x="18" y="21" />
             <point x="21" y="17.8" />
