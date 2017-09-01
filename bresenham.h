@@ -2,6 +2,7 @@
 #define BRESENHAM_H
 
 #include<stdio.h>
+#include <vector>
 
 static const int
 PIXEL_SIZE = 1000,

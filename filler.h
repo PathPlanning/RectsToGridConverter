@@ -1,8 +1,8 @@
 #ifndef FILLER_H
 #define FILLER_H
 
-#include "map.h"
 #include "bresenham.h"
+#include "map.h"
 #include <queue>
 #include <list>
 
@@ -20,14 +20,17 @@ struct Edge_bucket {
 class Filler
 {
 public:
-    Filler(Map &map);
+    Filler();
     ~Filler();
-    void create_edges(std::vector<Point<int> > obstacle, Map &map);
-    void process_et(Map &map);
+    void fill_map(Map &_map);
 
 private:
     std::list<Edge_bucket> edge_table_;
     std::list<Edge_bucket> active_list_;
+
+    void create_edges(std::vector<Point<int> > obstacle, Map &map);
+    void process_et(Map &map);
+
 };
 
 #endif // FILLER_H

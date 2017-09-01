@@ -1,19 +1,19 @@
 #include "filler.h"
 
-Filler::Filler(Map &map)
-{
-    for (auto elem : map.obstacles) {
-        create_edges(elem, map);
-        process_et(map);
-    }
-    std::cout << "Filling completed" << std::endl;
-    create_xml(map);
-}
-
+Filler::Filler() {}
 Filler::~Filler()
 {
     if (!edge_table_.empty()) edge_table_.erase(edge_table_.begin(), edge_table_.end());
     if (!active_list_.empty()) active_list_.erase(active_list_.begin(), active_list_.end());
+}
+
+void Filler::fill_map(Map &_map)
+{
+    for (auto elem : _map.get_obstacles()) {
+        create_edges(elem, _map);
+        process_et(_map);
+    }
+    std::cout << "Filling completed" << std::endl;
 }
 
 void Filler::create_edges(std::vector<Point<int> > obstacle, Map &map)
@@ -21,11 +21,12 @@ void Filler::create_edges(std::vector<Point<int> > obstacle, Map &map)
     obstacle.push_back(obstacle[0]);
     for (int i = 0; i < obstacle.size() - 1; ++i) {
         for (auto elem : lineBresenham(obstacle[i], obstacle[i + 1]))
-            if (map.in_bounds(elem)) map.grid[elem.y][elem.x] = 1;
+            if (map.in_bounds(elem)) map[elem.y][elem.x] = 1;
         if (obstacle[i].y != obstacle[i + 1].y) {
             double sign = static_cast<double>(obstacle[i].x - obstacle[i + 1].x) / (obstacle[i].y - obstacle[i + 1].y);
             if (sign < 0) sign = -1;
             if (sign > 0) sign = 1;
+            //sign can remain 0 (vertical edges). That means there will be no movements of x near this edge
             if (obstacle[i].y < obstacle[i + 1].y) {
                 edge_table_.push_back(Edge_bucket(obstacle[i].y, obstacle[i + 1].y, obstacle[i].x, sign, abs(obstacle[i + 1].x - obstacle[i].x), obstacle[i + 1].y - obstacle[i].y));
             } else if (obstacle[i].y > obstacle[i + 1].y) {
@@ -55,7 +56,7 @@ void Filler::process_et(Map &map) {
             ++it;
             int to = it->x;
             for (int cx = from; cx <= to; ++cx) {
-                if (map.in_bounds(Point<int>(cx, scanline))) map.grid[scanline][cx] = 1;
+                if (map.in_bounds(Point<int>(cx, scanline))) map[scanline][cx] = atoll(CN_CELL_IS_BLOCKED);
             }
             if (it == active_list_.end()) break;
             ++it;

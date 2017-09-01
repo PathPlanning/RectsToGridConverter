@@ -1,4 +1,5 @@
 #include "filler.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,6 +19,9 @@ int main(int argc, char *argv[])
     else std::cout << "WARNING: Not foung seed value. Using default." << std::endl;
     char *file_name = argv[1];
     Map map(file_name, seed);
-    Filler new_filler(map);
+    map.process_map();
+    Filler new_filler;
+    new_filler.fill_map(map);
+    map.create_xml();
     return 0;
 }

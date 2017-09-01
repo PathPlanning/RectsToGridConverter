@@ -1,8 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <vector>
 #include "parser.h"
+#include "point.h"
 
 struct Edges
 {
@@ -14,16 +14,23 @@ struct Edges
 class Map
 {
 public:
-    Map(char *filename, double seed);
+    Map(double sseed = 1);
+    Map(const char *filename, double seed);
     ~Map();
-    Point<int> convert_abs_point(Point<double> abs_point, Edges new_edge);
-    void desc();
-    Point<int> nearest_int(Point<int> point);
+
+    int * operator [] (int i);
+    const int * operator [] (int i) const;
+    std::vector<std::vector<Point<int> > > get_obstacles();
     bool in_bounds(Point<int> point);
+    void get_map(const char *fname);
+    void create_xml();
+    void process_map();
+
+    int height, width;
+private:
 
     int ** grid;
     std::vector<std::vector<Point<int> > > obstacles;
-    int height, width;
     Point<int> start, goal;
     double seed;
     std::string logfilename;
@@ -34,6 +41,12 @@ public:
     double abs_height, abs_width;
 
     Point<double> abs_start, abs_goal;
+
+    Point<int> convert_abs_point(Point<double> abs_point, Edges new_edge);
+    void discrete();
+    Point<int> nearest_int(Point<int> point);
+
+
 };
 
 #endif // MAP_H

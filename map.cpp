@@ -1,11 +1,11 @@
 #include "map.h"
 
-Map::Map(char * filename, double sseed)
+Map::Map(double sseed) { seed = sseed; }
+
+Map::Map(const char * filename, double sseed)
 {
-    get_map(*this, filename);
+    logfilename = filename;
     seed = sseed;
-    desc();
-    std::cout << "desc completed" << std::endl;
 }
 
 Map::~Map() {
@@ -15,6 +15,17 @@ Map::~Map() {
         }
         delete[] grid;
     }
+}
+
+int * Map::operator [] (int i) {
+    return grid[i];
+}
+const int * Map::operator [] (int i) const {
+    return grid[i];
+}
+
+std::vector<std::vector<Point<int> > > Map::get_obstacles() {
+    return obstacles;
 }
 
 Point<int> Map::convert_abs_point(Point<double> abs_point, Edges new_edge)
@@ -45,7 +56,7 @@ bool Map::in_bounds(Point<int> point)
     return point.x >= 0 && point.y >= 0 && point.x < width && point.y < height;
 }
 
-void Map::desc()
+void Map::discrete()
 {
     double left_edge = abs_start.x - seed / 2;
     if (left_edge < 0) left_edge = 0;
@@ -83,4 +94,183 @@ void Map::desc()
             grid[count][i] = 0;
         }
     }
+    std::cout << "Discretisation completed" << std::endl;
+}
+
+void Map::get_map(const char *fname) {
+    TiXmlDocument doc(fname);
+    try {
+        if(doc.LoadFile()) {
+            std::cout << "Load sucsses" << std::endl;
+        } else {
+            throw "ERROR: Load failed. Try another file";
+        }
+    }
+    catch (const char * exc) {
+        std::cout << exc << std::endl;
+        exit(0);
+    }
+    TiXmlElement *root = doc.FirstChildElement(CNS_ROOT);
+    if(root) {
+        TiXmlElement *map = root->FirstChildElement(CNS_MAP);
+        if(map) {
+            TiXmlElement *ttitle = map->FirstChildElement(CNS_TITLE);
+            if(ttitle) {
+                const char *title_value = ttitle->GetText();
+                title = title_value;
+            }
+            TiXmlElement *twidth = map->FirstChildElement(CNS_ABSWIDTH);
+            if(twidth) {
+                const char *width_value = twidth->GetText();
+                abs_width =  convert_to_double(width_value);
+            } else exit_error(CNS_ABSWIDTH);
+            TiXmlElement *theight = map->FirstChildElement(CNS_ABSHEIGHT);
+            if(theight) {
+                const char *height_value = theight->GetText();
+                abs_height =  convert_to_double(height_value);
+            } else exit_error(CNS_ABSWIDTH);
+
+            TiXmlElement *abs_startx = map->FirstChildElement(CNS_ABSSTARTX);
+            if(abs_startx) {
+                const char *abs_startx_value = abs_startx->GetText();
+                abs_start.x = convert_to_double(abs_startx_value);
+                start_point = true;
+            } else {
+                warning(CNS_ABSSTARTX);
+                abs_start.x = 0;
+                start_point = false;
+            }
+            TiXmlElement *abs_starty = map->FirstChildElement(CNS_ABSSTARTY);
+            if(abs_starty) {
+                const char *starty_value = abs_starty->GetText();
+                abs_start.y = convert_to_double(starty_value);
+            } else {
+                warning(CNS_ABSSTARTY);
+                abs_start.y = 0;
+            }
+            TiXmlElement *finishx = map->FirstChildElement(CNS_ABSFINISHX);
+            if(finishx) {
+                const char *finishx_value = finishx->GetText();
+                abs_goal.x =  convert_to_double(finishx_value);
+            } else {
+                warning(CNS_ABSFINISHX);
+                abs_goal.x = 0;
+            }
+            TiXmlElement *finishy = map->FirstChildElement(CNS_ABSFINISHY);
+            if(finishy) {
+                const char *finishy_value = finishy->GetText();
+                abs_goal.y =  convert_to_double(finishy_value);
+            } else {
+                warning(CNS_ABSFINISHY);
+                abs_goal.y = 0;
+            }
+            TiXmlElement *obstacles = map->FirstChildElement(CNS_OBSTACLES);
+            if(obstacles) {
+                TiXmlElement *obstacle = obstacles->FirstChildElement(CNS_OBSTACLE);
+                if(obstacle) {
+                    for (obstacle; obstacle; obstacle = obstacle->NextSiblingElement(CNS_OBSTACLE)) {
+                        std::vector<Point<double> > ps;
+                        TiXmlElement *point = obstacle->FirstChildElement(CNS_POINT);
+                        if(point) {
+                            for (point; point; point = point->NextSiblingElement(CNS_POINT)) {
+                                const char * x = point->Attribute(CNS_X);
+                                const char * y = point->Attribute(CNS_Y);
+                                ps.push_back(Point<double>(convert_to_double(x), convert_to_double(y)));
+                            }
+                        }
+                        abs_obstacles.push_back(ps);
+                    }
+                }
+            } else exit_error(CNS_OBSTACLES);
+            std::cout << "Reading map sucsses" << std::endl;
+        } else exit_error(CNS_MAP);
+        logfilename = fname;
+    } else exit_error(CNS_ROOT);
+}
+
+
+//function to convert information and create xml file
+void Map::create_xml() {
+    TiXmlDocument doc;
+    TiXmlDeclaration *decl = new TiXmlDeclaration("1.0","UTF-8","");
+    doc.LinkEndChild(decl);
+
+    TiXmlElement *root = new TiXmlElement(CNS_ROOT);
+
+    doc.LinkEndChild(root);
+
+    TiXmlElement *map = new TiXmlElement(CNS_MAP);
+    TiXmlElement *twidth = new TiXmlElement(CNS_WIDTH);
+    TiXmlText *textwidth = convert_to_xml(width);
+    twidth->LinkEndChild(textwidth);
+    map->LinkEndChild(twidth);
+
+    TiXmlElement *theight = new TiXmlElement(CNS_HEIGHT);
+    TiXmlText *textheight = convert_to_xml(height);
+    theight->LinkEndChild(textheight);
+    map->LinkEndChild(theight);
+
+    TiXmlElement *cellsize = new TiXmlElement(CNS_CELLSIZE);
+    TiXmlText *textcellsize = convert_to_xml(seed);
+    cellsize->LinkEndChild(textcellsize);
+    map->LinkEndChild(cellsize);
+
+    if (start_point) {
+        TiXmlElement *startx = new TiXmlElement(CNS_STARTX);
+        TiXmlText *textstartx = convert_to_xml(start.x);
+        startx->LinkEndChild(textstartx);
+        map->LinkEndChild(startx);
+
+        TiXmlElement *starty = new TiXmlElement(CNS_STARTY);
+        TiXmlText *textstarty = convert_to_xml(start.y);
+        starty->LinkEndChild(textstarty);
+        map->LinkEndChild(starty);
+
+        TiXmlElement *finishx = new TiXmlElement(CNS_FINISHX);
+        TiXmlText *textfinishx = convert_to_xml(goal.x);
+        finishx->LinkEndChild(textfinishx);
+        map->LinkEndChild(finishx);
+
+        TiXmlElement *finishy = new TiXmlElement(CNS_FINISHY);
+        TiXmlText *textfinishy = convert_to_xml(goal.y);
+        finishy->LinkEndChild(textfinishy);
+        map->LinkEndChild(finishy);
+    }
+
+    TiXmlElement *gr = new TiXmlElement(CNS_GRID);
+    for (int i = 0; i < height; ++i){
+        TiXmlElement *row = new TiXmlElement(CNS_ROW);
+        TiXmlText *textrow = convert_string(grid[i], width);
+        row->SetAttribute(CNS_NUMBER, i);
+        row->LinkEndChild(textrow);
+        gr->LinkEndChild(row);
+    }
+    map->LinkEndChild(gr);
+    root->LinkEndChild(map);
+
+    std::stringstream ss;
+    ss << logfilename;
+    std::string file_name = ss.str();
+    std::stringstream sss;
+    sss << height;
+    std::string add;
+    if (height != width) {
+        std::stringstream s;
+        s << width;
+        add = "_" + sss.str() + "x" + s.str() + ".";
+    } else add = "_" + sss.str() + ".";
+    if(file_name.rfind(".") != std::string::npos) {
+        file_name.replace(file_name.rfind("."), 1, add);
+    } else {
+        file_name += add + "xml";
+    }
+    logfilename = file_name;
+
+    doc.SaveFile(logfilename.c_str());
+    std::cout << "XML file has been created" << std::endl;
+}
+
+void Map::process_map() {
+    get_map(logfilename.c_str());
+    discrete();
 }
