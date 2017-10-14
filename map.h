@@ -17,7 +17,7 @@ struct Edges
 class Map
 {
 public:
-    Map(double sseed = 1, double rad = 1);
+    Map(double sseed = 1, double rad = 0);
     Map(const char *filename, double seed, double rad);
     ~Map();
 

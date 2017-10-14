@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     double seed = 1;
     if(argv[2]) seed = atof(argv[2]);
     else std::cout << "WARNING: Not foung seed value. Using default." << std::endl;
-    double radius = 1;
+    double radius = 0;
     if(argv[3]) radius = atof(argv[3]);
     else std::cout << "WARNING: Not foung radius value. Using default." << std::endl;
     char *file_name = argv[1];
