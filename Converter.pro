@@ -14,6 +14,8 @@ SOURCES += main.cpp \
     tinyxml/tinyxmlparser.cpp \
     map.cpp \
     filler.cpp \
+    polygonoffset.cpp \
+    clipper/clipper.cpp
 
 HEADERS += \
     parser.h \
@@ -23,4 +25,6 @@ HEADERS += \
     map.h \
     filler.h \
     point.h \
-    bresenham.h
+    bresenham.h \
+    polygonoffset.h \
+    clipper/clipper.hpp

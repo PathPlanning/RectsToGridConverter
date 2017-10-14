@@ -2,7 +2,10 @@
 #define MAP_H
 
 #include "parser.h"
+#include "clipper/clipper.hpp"
 #include "point.h"
+
+using namespace ClipperLib;
 
 struct Edges
 {
@@ -14,8 +17,8 @@ struct Edges
 class Map
 {
 public:
-    Map(double sseed = 1);
-    Map(const char *filename, double seed);
+    Map(double sseed = 1, double rad = 1);
+    Map(const char *filename, double seed, double rad);
     ~Map();
 
     int * operator [] (int i);
@@ -33,8 +36,11 @@ private:
     std::vector<std::vector<Point<int> > > obstacles;
     Point<int> start, goal;
     double seed;
+    double radius;
     std::string logfilename;
     bool start_point;
+
+    std::vector<Point<int> > offset_polygon(std::vector<Point<int> > polygon, double radius);
 
     const char * title;
     std::vector<std::vector<Point<double> > >  abs_obstacles;

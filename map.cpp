@@ -1,11 +1,12 @@
 #include "map.h"
 
-Map::Map(double sseed) { seed = sseed; }
+Map::Map(double sseed, double rad) { seed = sseed; radius = rad; }
 
-Map::Map(const char * filename, double sseed)
+Map::Map(const char * filename, double sseed, double rad)
 {
     logfilename = filename;
     seed = sseed;
+    radius = rad;
 }
 
 Map::~Map() {
@@ -85,7 +86,8 @@ void Map::discrete()
             Point<int> p = convert_abs_point(point, edge_);
             ob.push_back(p);
         }
-        obstacles.push_back(ob);
+        std::vector<Point<int> > ofs_ob = offset_polygon(ob, radius);
+        obstacles.push_back(ofs_ob);
     }
     grid = new int * [height];
     for(int count = 0; count < height; ++count){
@@ -188,6 +190,26 @@ void Map::get_map(const char *fname) {
     } else exit_error(CNS_ROOT);
 }
 
+std::vector<Point<int> > Map::offset_polygon(std::vector<Point<int> > polygon, double radius) {
+
+    Path subj;
+    for (auto elem : polygon) {
+        subj.push_back(IntPoint(elem.x, elem.y));
+    }
+    Paths solution;
+    ClipperOffset co;
+    co.AddPath(subj, jtRound, etClosedPolygon);
+    co.Execute(solution, radius);
+    std::vector<Point<int> > result;
+    for (auto elem : solution) {
+        for (auto el : elem) {
+            result.push_back(Point<int>(el.X, el.Y));
+        }
+    }
+    //std::cout << solution << std::endl;
+    //draw solution ...
+    return result;
+}
 
 //function to convert information and create xml file
 void Map::create_xml() {
