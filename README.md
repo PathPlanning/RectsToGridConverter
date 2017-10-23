@@ -7,7 +7,13 @@ This project contains implementations of the following converter:
 
 the converter takes a set of polygons, defined as a sequences of rational coordinates, size of current workspace in rational numbers and optionally start and goal rational coordinates (the discretization will be according to the start position, so that the object will always be in the center of the cell); the polygon definition must include all vertices of the polygon in strict order; polygons can extend beyond borders of current workspace or overlap; the convertor transform a set o polygons to integer square/rectangular grid using predefined parameter - discretization seed.
 
-![1](https://user-images.githubusercontent.com/17624024/31883253-eece47f4-b7f1-11e7-991c-41941bfd3c2a.png) ![2](https://user-images.githubusercontent.com/17624024/31883263-f6586734-b7f1-11e7-9efe-0b66c2f2a9e1.png) ![3](https://user-images.githubusercontent.com/17624024/31883270-f8e44388-b7f1-11e7-9744-7d0f62886976.png)
+|Agent's environment with obstacles, start and goal vertices | Discrete environment with seed value equals 1 | Discrete environment with seed value equals 0.5||
+|------------------------------------------------------------|-----------------------------------------------| -----------------------------------------------||
+|![1][11]                                                    | ![3][33]                                      |                                        ![2][22]||
+
+[11]: https://user-images.githubusercontent.com/17624024/31891284-9de72ed8-b80e-11e7-8b51-e34a617dc956.jpeg
+[22]: https://user-images.githubusercontent.com/17624024/31891288-a22c0d60-b80e-11e7-96b3-908348c48f6f.jpeg
+[33]: https://user-images.githubusercontent.com/17624024/31891295-a6299400-b80e-11e7-9a35-c40918beecd7.jpeg
 
 In the process there is also polygon offseting algorithm, which offset polygons depending on the radius of a moving agent. 
 
