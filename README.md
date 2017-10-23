@@ -13,9 +13,9 @@ Agent's environment with obstacles, start and goal vertices before discretizatio
 
 And after we have:
 
-<img align="left" src="https://user-images.githubusercontent.com/17624024/31891295-a6299400-b80e-11e7-9a35-c40918beecd7.jpeg" width="200" title="2" hspace="20"/>
+<img align="left" src="https://user-images.githubusercontent.com/17624024/31891295-a6299400-b80e-11e7-9a35-c40918beecd7.jpeg" width="500" title="2" hspace="20"/>
 
-<img align="left" src="https://user-images.githubusercontent.com/17624024/31891288-a22c0d60-b80e-11e7-96b3-908348c48f6f.jpeg" width="200" title="3" hspace="20"/>
+<img align="left" src="https://user-images.githubusercontent.com/17624024/31891288-a22c0d60-b80e-11e7-96b3-908348c48f6f.jpeg" width="500" title="3" hspace="20"/>
 
 Discrete environment with seed value equals 1 | Discrete environment with seed value equals 0.5
 
