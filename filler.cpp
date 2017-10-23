@@ -41,8 +41,8 @@ void Filler::process_et(Map &map) {
     int scanline = edge_table_.front().ymin;
     while (!edge_table_.empty()) {
         if (!active_list_.empty()) {
-            active_list_.remove_if([scanline](Edge_bucket curr) { return curr.ymax == scanline; });
-            edge_table_.remove_if([scanline](Edge_bucket curr) { return curr.ymax == scanline; });
+            active_list_.remove_if([scanline](Edge_bucket curr) { return curr.ymax == scanline - 1; });
+            edge_table_.remove_if([scanline](Edge_bucket curr) { return curr.ymax == scanline - 1; });
         }
         for (auto it = edge_table_.begin(); it != edge_table_.end(); ++it) {
             if (it->ymin == scanline) {

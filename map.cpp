@@ -84,6 +84,7 @@ void Map::discrete()
         std::vector<Point<int> > ob;
         for (auto point : elem) {
             Point<int> p = convert_abs_point(point, edge_);
+            std::cout << "(" << p.x <<',' << p.y << ')' << std::endl;
             ob.push_back(p);
         }
         std::vector<Point<int> > ofs_ob = offset_polygon(ob, radius);
