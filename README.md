@@ -7,6 +7,8 @@ This project contains implementations of the following converter:
 
 the converter takes a set of polygons, defined as a sequences of rational coordinates, size of current workspace in rational numbers and optionally start and goal rational coordinates (the discretization will be according to the start position, so that the object will always be in the center of the cell); the polygon definition must include all vertices of the polygon in strict order; polygons can extend beyond borders of current workspace or overlap; the convertor transform a set o polygons to integer square/rectangular grid using predefined parameter - discretization seed.
 
+![1](https://user-images.githubusercontent.com/17624024/31883253-eece47f4-b7f1-11e7-991c-41941bfd3c2a.png) ![2](https://user-images.githubusercontent.com/17624024/31883263-f6586734-b7f1-11e7-9efe-0b66c2f2a9e1.png) ![3](https://user-images.githubusercontent.com/17624024/31883270-f8e44388-b7f1-11e7-9744-7d0f62886976.png)
+
 In the process there is also polygon offseting algorithm, which offset polygons depending on the radius of a moving agent. 
 
 Converter takes tree parameters: 
@@ -14,7 +16,7 @@ Converter takes tree parameters:
 * predefined rational discretization seed 
 * predefined rational agent radius
 
-Rational discretization seed - rational number, which defines the process of discretization (transferring continuous map represintation into discrete counterpart). The value of the discretization defines the size (in meters) of one cell on discrete grid. Accordingly, the larger discretization seed value, the smaller the grid and the more obscure the obstacles.
+Rational discretization seed - rational number, which defines the process of discretization (transferring continuous map represintation into discrete counterpart). The value of the discretization defines the size (in meters) of one cell on discrete grid. Accordingly, the larger discretization seed value, the smaller the grid and the more obscure the obstacles. Default value - 1. 
 
 Rational agent radius - rational number, which defines the radius of an agent (assuming that we can approximize it's shape to a disk). Default value - 0 (agent is a particle).
 
@@ -32,6 +34,26 @@ Your compiler must support C++ 11 standard.
 To launch the compiled file and get a result you need parameters - an input XML file, your discretization seed and radius of the agent.
 
 Some examples are given in folder [samples](https://github.com/PathPlanning/RectsToGridConverter/tree/master/samples).
+
+Download project using:
+
+`git clone https://github.com/PathPlanning/RectsToGridConverter.git`
+
+or downolad the archive directly.
+
+Using **QT Creator**: Then open `.pro` file with **Qt Creator**.
+
+Using **CMake**: Run terminal. Build project using:
+
+```bash
+cd PATH_TO_PROJECT
+cmake .
+make
+```
+And then run the project with the following arguments (path_to_map_file, descretization_seed=1, agent_radius=0):
+
+`./Converter PATH_TO_XML_FILE 1 0`
+
 
 Input and Output files
 ======================
