@@ -13,11 +13,10 @@ Agent's environment with obstacles, start and goal vertices before discretizatio
 
 And after we have:
 
-<img align="left" src="https://user-images.githubusercontent.com/17624024/31891295-a6299400-b80e-11e7-9a35-c40918beecd7.jpeg" width="500" title="2" hspace="20"/>
+| ![photo5435924095918254127](https://user-images.githubusercontent.com/17624024/31895026-c9801532-b818-11e7-9219-201bd29ecded.jpg)] | ![photo5435924095918254126](https://user-images.githubusercontent.com/17624024/31895027-cb3c11f0-b818-11e7-8442-3017d3ee65d9.jpg) |
+|:---:|:---:|
+| Discrete environment with seed value equals 1 | Discrete environment with seed value equals 0.5 |
 
-<img align="left" src="https://user-images.githubusercontent.com/17624024/31891288-a22c0d60-b80e-11e7-96b3-908348c48f6f.jpeg" width="500" title="3" hspace="20"/>
-
-Discrete environment with seed value equals 1 | Discrete environment with seed value equals 0.5
 
 In the process there is also polygon offseting algorithm, which offset polygons depending on the radius of a moving agent. 
 
